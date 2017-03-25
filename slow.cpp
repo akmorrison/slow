@@ -3,14 +3,14 @@
 #include <string>
 #include <vector>
 #include <cmath>
+#include "args.h"
 
 using namespace std;
 
 vector<string> getlines()
 {
         vector<string> lines;
-        while(cin){
-                string newline;
+        while(cin){ string newline;
                 getline(cin, newline);
                 lines.push_back(newline);
         }
@@ -28,8 +28,18 @@ string string_to_print(string full_string, int line, int iter, int num_lines, in
         return full_string.substr(0,length);        
 }
 
-int main()
+int main(int argc, char *argv[])
 {
+        int speed;
+        //do argument things
+        try{
+                Args args(argc, argv);
+                speed = args.speed;
+        }
+        catch(const char* msg){
+                cerr << "Exception: " << msg << endl;
+                return 1;
+        }
         //get all the lines
         vector<string> lines = getlines();
         if(lines.size() == 0)
@@ -54,6 +64,6 @@ int main()
                         cout << j << endl;
                 }
                 iter++;
-                usleep(300 * 1000);
+                usleep(speed);
         }
 }
