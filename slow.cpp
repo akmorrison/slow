@@ -24,7 +24,7 @@ string string_to_print(string full_string, int line, int iter, int num_lines, in
 {
         if(full_string.length() < iter)
                 return full_string;
-        int length = (int) sqrt(max(iter*iter - line*line, 0));
+        int length = (int) sqrt(max(iter*iter - 8*line*line, 0));
         return full_string.substr(0,length);        
 }
 
@@ -54,6 +54,6 @@ int main()
                         cout << j << endl;
                 }
                 iter++;
-                usleep(1000 * 100);
+                usleep(300 * 1000);
         }
 }
