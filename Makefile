@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -O2 -Wall
-objects = slow.o args.o
+objects = slow.o args.o animations.o
 EXECUTABLE = slow
 
 all: $(EXECUTABLE)
@@ -12,6 +12,9 @@ slow.o: slow.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 args.o: args.cpp args.h
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+animations.o: animations.cpp animations.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:

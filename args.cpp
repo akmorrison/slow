@@ -1,4 +1,5 @@
 #include"args.h"
+#include"animations.h"
 #include<iostream>
 #include<string>
 #include<stdlib.h>
@@ -12,6 +13,7 @@ void setOption(int& field, char* value){
 Args::Args(int argc, char* argv[]){
         //default values
         speed = 100 * 1000;
+        get_string_func = string_to_print_tl;
 
         bool skip_flag = false;
         for(int i = 1; i < argc; i++){

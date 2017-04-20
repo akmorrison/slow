@@ -2,8 +2,8 @@
 #include <unistd.h>
 #include <string>
 #include <vector>
-#include <cmath>
 #include "args.h"
+#include "animations.h"
 
 using namespace std;
 
@@ -20,54 +20,16 @@ vector<string> getlines()
         return lines;
 }
 
-string string_to_print_tl(string full_string, int line, int iter, int num_lines, int max_line_length)
-{
-        if(full_string.length() < iter)
-                return full_string;
-        int length = (int) sqrt(max(iter*iter - 8*line*line, 0));
-        return full_string.substr(0,length);        
-}
-
-string string_to_print_cc(string full_string, int line, int iter, int num_lines, int max_line_length)
-{
-        int center_x = max_line_length / 2;
-        int center_y = num_lines / 2;
-        int characters_to_print = sqrt(max(iter*iter - (line-center_y)*(line-center_y), 0));
-        int preceeding_spaces = center_x - characters_to_print;
-
-        if(preceeding_spaces <= 0)
-                return full_string;
-        string return_str;
-        for(int i = 0; i < full_string.length(); i++){
-                if(i < preceeding_spaces)
-                        return_str += " ";
-                else if(i - preceeding_spaces < characters_to_print * 2)
-                        return_str += full_string[i];
-        }
-        return return_str;
-
-        /*
-        ............c_to_print....
-        ..y.......|----...........
-        .......dl.|../............
-        ..........|./..iter.......
-        ..cy......c...............
-        ..........................
-        ..iter^2 = ctp^2 + dl^2...
-        ..ctp = sqrt(iter^2-dl^2).
-        ..........................
-        */
-}
-
-string (*get_string_func)(string, int, int, int, int) = string_to_print_cc;
 
 int main(int argc, char *argv[])
 {
         int speed;
+        string (*get_string_func)(string, int, int, int, int);
         //do argument things
         try{
                 Args args(argc, argv);
                 speed = args.speed;
+                get_string_func = args.get_string_func;
         }
         catch(const char* msg){
                 cerr << "Exception: " << msg << endl;
