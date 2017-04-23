@@ -10,6 +10,15 @@ void setOption(int& field, char* value){
                 throw "Invalid speed parameter";
 }
 
+void setStyle(string (**get_string_func)(string, int, int, int, int), string func_name){
+        if(func_name == "topleft")
+                *get_string_func = string_to_print_tl;
+        else if(func_name == "centercircle")
+                *get_string_func = string_to_print_cc;
+        else
+                throw "Invalid style parameter";
+}
+
 Args::Args(int argc, char* argv[]){
         //default values
         speed = 100 * 1000;
@@ -28,6 +37,13 @@ Args::Args(int argc, char* argv[]){
                                         if(i == argc -1)
                                                 throw "Missing parameter";
                                         setOption(speed, argv[i+1]);
+                                        skip_flag = true;
+                                        goto endfor;
+                                }
+                                else if(*argv[i] == 's') {
+                                        if(i == argc -1)
+                                                throw "Missing parameter";
+                                        setStyle(&get_string_func, string(argv[i+1]));
                                         skip_flag = true;
                                         goto endfor;
                                 }
