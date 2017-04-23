@@ -23,6 +23,7 @@ Args::Args(int argc, char* argv[]){
         //default values
         speed = 100 * 1000;
         get_string_func = string_to_print_tl;
+        print_help = false;
 
         bool skip_flag = false;
         for(int i = 1; i < argc; i++){
@@ -46,6 +47,9 @@ Args::Args(int argc, char* argv[]){
                                         setStyle(&get_string_func, string(argv[i+1]));
                                         skip_flag = true;
                                         goto endfor;
+                                }
+                                else if(*argv[i] == 'h') {
+                                        print_help = true;
                                 }
                                 else{
                                         throw "Unrecognized Option!";

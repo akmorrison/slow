@@ -25,15 +25,27 @@ int main(int argc, char *argv[])
 {
         int speed;
         string (*get_string_func)(string, int, int, int, int);
+        bool print_help;
         //do argument things
         try{
                 Args args(argc, argv);
                 speed = args.speed;
                 get_string_func = args.get_string_func;
+                print_help = args.print_help;
         }
         catch(const char* msg){
                 cerr << "Exception: " << msg << endl;
                 return 1;
+        }
+        if(print_help){
+                cout << "Slow: print stuff slower\n"
+                << "Command line options:\n"
+                << "\t-u <microseconds>: set speed, in microseconds\n"
+                << "\t-s <style>: Set output style from the following options\n"
+                << "\t\tcentercircle: make the text radiate from center\n"
+                << "\t\ttopleft: make the text radiate from top left\n"
+                << "\t-h: print this help message and exit" << endl;
+                return 0;
         }
         //get all the lines
         vector<string> lines = getlines();
