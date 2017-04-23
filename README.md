@@ -17,4 +17,5 @@ demo
 
 GIIIFFFFSSS!!!
 
-![alt text](https://github.com/akmorrison/slow/raw/master/gifs/circular_demo.gif "circle wave print style")
+![alt text](https://github.com/akmorrison/slow/raw/master/gifs/centercircle.gif "center circle print style")
+![alt text](https://github.com/akmorrison/slow/raw/master/gifs/topleft.gif "top left print style")
